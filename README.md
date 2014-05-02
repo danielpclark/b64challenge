@@ -14,7 +14,7 @@ So increment all 12 character unique strings without wasting CPU cycles on skip 
 
 # **Criterion**
 
-Pass 5 test cases with different position rollover cases (when the next digit to the left increments).
+Pass 5 test cases with different position rollover cases (when the next place position increments).
 
 ># **About Number Bases**
 >
