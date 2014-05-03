@@ -17,9 +17,9 @@ class B64
 	def inc(s)
 		# increment last item in string or false
 		unless @b64[s[-1]] == @b64.length-1
-			if first_non(s,s[-1]) # and not @b64[s[-2]] == @b64[s[-1]]+1
+			if first_non(s,s[-1])
 				s[-1] = first_non(s,s[-1])
-			elsif not first_non(s,s[-2]) # and not @b64[s[-2]] == @b64[s[-1]]+1
+			elsif not first_non(s,s[-2])
 				s[-1] = first_non(s)
 				if first_non(s,s[-2])
 					s[-2] = first_non(s,s[-2])
