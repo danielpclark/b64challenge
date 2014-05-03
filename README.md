@@ -45,7 +45,7 @@ The swap task then looks for the chunk to jump to eg: in (Base 10) to go from 00
 		def next
 			# this is where everything moves forward
 			unless inc(@string)
-				@string = swapper
+				swapper
 			end
 			@string
 		end
@@ -60,10 +60,10 @@ The swap task then looks for the chunk to jump to eg: in (Base 10) to go from 00
 					if first_non(s,s[-2])
 						s[-2] = first_non(s,s[-2])
 					else
-						s = swapper
+						swapper
 					end
 				else
-					s = swapper
+					swapper
 				end
 			else
 				return false
