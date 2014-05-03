@@ -131,7 +131,7 @@ And here is it's output.
 
 # Submission
 
-Please send a pull request and name your file as follows `golfb64-<yourname>.xxx` for your golf answers and `longb64-<yourname>.xxx` for your long answer versions.  Use any promming language you'd like.  I've included my long version [`longb64-danielpclark.rb`][3]  To see other people's submissions you can check [here][2] as well.
+Please fork and send a pull request and name your file as follows `golfb64-<yourname>.xxx` for your golf answers and `longb64-<yourname>.xxx` for your long answer versions.  Use any promming language you'd like.  I've included my long version [`longb64-danielpclark.rb`][3]  To see other people's submissions you can check [here][2] as well.
 
 
   [1]: http://en.wikipedia.org/wiki/Base_64
