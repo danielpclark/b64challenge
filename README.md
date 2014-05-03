@@ -53,18 +53,18 @@ The swap task then looks for the chunk to jump to eg: in (Base 10) to go from 00
 		def inc(s)
 			# increment last item in string or false
 			unless @b64[s[-1]] == @b64.length-1
-				s.length.times do |c|
-					if c+@b64[s[-1]]+1 > @b64.length-1
-						break
-					end
-					val = @b64.invert[@b64[s[-1]]+1+c]
-					if not !!s[val]
-						s[-1] = val
-						break
+				if first_non(s,s[-1]) # and not @b64[s[-2]] == @b64[s[-1]]+1
+					s[-1] = first_non(s,s[-1])
+				elsif not first_non(s,s[-2]) # and not @b64[s[-2]] == @b64[s[-1]]+1
+					s[-1] = first_non(s)
+					if first_non(s,s[-2])
+						s[-2] = first_non(s,s[-2])
 					else
-						return false
+						s = swapper
 					end
-				end	 
+				else
+					s = swapper
+				end
 			else
 				return false
 			end
@@ -79,32 +79,33 @@ The swap task then looks for the chunk to jump to eg: in (Base 10) to go from 00
 
 		def swapper
 			# save loop cycles by substituting with next unique charcter set
-			val = @string[0..seek_high(@string[0..-2])-1]
+			val = @string[0..seek_high(@string)-1]
 			inc(val)
-			count = @string[seek_high(@string[0..-2])..-1].length
+			count = @string[seek_high(@string)..-1].length
 			count.times do |pos|
 				val += first_non(val)
 			end
-			val
+			@string = val
 		end
 
-		def first_non(s)
+		def first_non(s,start = @b64.invert[0])
 			# find the lowest not used character in base
-			(0..@b64.length-1).each do |p|
+			(@b64[start]..@b64.length-1).each do |p|
 				unless !!s[@b64.invert[p]]
 					return @b64.invert[p]
 				end
 			end
+			return false
 		end
 
 	end
 
 	# Pass 5 test cases with rollovers
-	["ABCDEFGHIJK9","ABCD/9876542","ABCDEF+/9875","ABCDEFG+/985","A+/987654310"].each do |val|
+	["ABCDEFGHIJK9","ABCD/9876542","ABCDEF+/9875","ABCDEFG+/985","A+/987654320"].each do |val|
 		test = B64.new(val)
 		puts " ******** TEST FOR ROLLOVER SEQUENCE #{val} ******** "
 		5.times do
-			print test.next + " - "
+			print test.next + ", "
 		end
 		puts
 		puts
@@ -113,10 +114,10 @@ The swap task then looks for the chunk to jump to eg: in (Base 10) to go from 00
 And here is it's output.
 
 	 ******** TEST FOR ROLLOVER SEQUENCE ABCDEFGHIJK9 ******** 
-	ABCDEFGHIJK+, ABCDEFGHIJK/, ABCDEFGHIKJL, ABCDEFGHIKJM, ABCDEFGHIKJN,
+	ABCDEFGHIJK+, ABCDEFGHIJK/, ABCDEFGHIJLK, ABCDEFGHIJLM, ABCDEFGHIJLN, 
 
 	 ******** TEST FOR ROLLOVER SEQUENCE ABCD/9876542 ******** 
-	ABCD/9876543, ABCEDFGHIJKL, ABCEDFGHIJKM, ABCEDFGHIJKN, ABCEDFGHIJKO, 
+	ABCD/9876543, ABCD/987654+, ABCD/98765+E, ABCD/98765+F, ABCD/98765+G, 
 
 	 ******** TEST FOR ROLLOVER SEQUENCE ABCDEF+/9875 ******** 
 	ABCDEF+/9876, ABCDEF/GHIJK, ABCDEF/GHIJL, ABCDEF/GHIJM, ABCDEF/GHIJN, 
@@ -124,8 +125,8 @@ And here is it's output.
 	 ******** TEST FOR ROLLOVER SEQUENCE ABCDEFG+/985 ******** 
 	ABCDEFG+/986, ABCDEFG+/987, ABCDEFG/HIJK, ABCDEFG/HIJL, ABCDEFG/HIJM, 
 
-	 ******** TEST FOR ROLLOVER SEQUENCE A+/987654310 ******** 
-	A/BCDEFGHIJK, A/BCDEFGHIJL, A/BCDEFGHIJM, A/BCDEFGHIJN, A/BCDEFGHIJO, 
+	 ******** TEST FOR ROLLOVER SEQUENCE A+/987654320 ******** 
+	A+/987654321, A/BCDEFGHIJK, A/BCDEFGHIJL, A/BCDEFGHIJM, A/BCDEFGHIJN, 
 
 
 # Submission
