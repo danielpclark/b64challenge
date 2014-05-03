@@ -9,7 +9,7 @@ class B64
 	def next
 		# this is where everything moves forward
 		unless inc(@string)
-			@string = swapper
+			swapper
 		end
 		@string
 	end
@@ -24,10 +24,10 @@ class B64
 				if first_non(s,s[-2])
 					s[-2] = first_non(s,s[-2])
 				else
-					s = swapper
+					swapper
 				end
 			else
-				s = swapper
+				swapper
 			end
 		else
 			return false
