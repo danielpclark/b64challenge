@@ -14,7 +14,7 @@ So increment all 12 character unique strings without wasting CPU cycles on skip 
 
 # **Criterion**
 
-Pass 5 test cases with different position rollover cases (when the next digit to the left increments).
+Pass 5 test cases with different position rollover cases (when the next place position increments).
 
 ># **About Number Bases**
 >
@@ -131,8 +131,9 @@ And here is it's output.
 
 # Submission
 
-Please send a pull request and name your file as follows `golfb64-<yourname>.xxx` for your golf answers and `longb64-<yourname>.xxx` for your long answer versions.  Use any promming language you'd like.  I've included my long version `longb64-danielpclark.rb`  To see other people's submissions you can check [here][2] as well.
+Please send a pull request and name your file as follows `golfb64-<yourname>.xxx` for your golf answers and `longb64-<yourname>.xxx` for your long answer versions.  Use any promming language you'd like.  I've included my long version [`longb64-danielpclark.rb`][3]  To see other people's submissions you can check [here][2] as well.
 
 
   [1]: http://en.wikipedia.org/wiki/Base_64
   [2]: http://codegolf.stackexchange.com/questions/26503/base-64-all-unique-12-character-incrementor-without-skip-next-on-rollovers-in
+  [3]: https://github.com/danielpclark/b64challenge/blob/master/longb64-danielpclark.rb
